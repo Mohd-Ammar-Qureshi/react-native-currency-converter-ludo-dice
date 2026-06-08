@@ -8,20 +8,22 @@ const App = () => {
   const theme = useColorScheme();
   const isDarkMode = theme === 'dark'
     return (
-      <View style={styles.mainContainer}>
+      <View style={[styles.mainContainer,{backgroundColor:isDarkMode ? '#000' : '#fff'}]}>
       <StatusBar
            backgroundColor={isDarkMode ? '#000' : '#fff'}
            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
       />         
       <SafeAreaView  style={styles.container} >
-         {/* <DiceRoll />
-              <Text style={styles.rollText}>Roll the Dice 🎲</Text> */}
-             
-         <CurrencyConverter/>
+        <View>
+         <DiceRoll />
+              <Text style={styles.rollText}>Roll the Dice 🎲</Text>
+          </View>   
+         {/* <CurrencyConverter/> */}
         </SafeAreaView>
       </View>
     )
 }
+
 const styles = StyleSheet.create({
   mainContainer:{
     flex: 1,
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#fcdc4ce8',
     textAlign: 'center'
   },
 })

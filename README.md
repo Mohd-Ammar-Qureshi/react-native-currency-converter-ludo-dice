@@ -81,4 +81,4 @@ A currency conversion application that converts Indian Rupees (INR) into multipl
 
 Mohd Ammar Qureshi
 
-BSc Graduate | MCA Student | React Native Developer | JavaScript | TypeScript
+BSc Graduate | MCA Student | React Native Developer | React Developer | JavaScript | TypeScript

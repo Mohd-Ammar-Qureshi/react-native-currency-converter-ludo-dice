@@ -21,7 +21,7 @@ type DiceProps = PropsWithChildren<{
 const Dice = ({imageUrl}: DiceProps):JSX.Element =>{
     return(
         <View>
-            <Image source={imageUrl} style={{ width: 200, height: 200 }} />
+            <Image source={imageUrl} style={[styles.img,{ width: 200, height: 200 }]} />
         </View>
     )
 }
@@ -31,42 +31,44 @@ const DiceRoll = ():JSX.Element => {
     const rotateValue = useRef(new Animated.Value(0)).current;
 
     const rollDiceOnTap = () => {
-        let randomNumber =  Math.floor(Math.random()*6)+1;
-        Animated.timing(rotateValue, {
-          toValue: 1,
-          duration: 1500,
-          useNativeDriver: true,
-        }).start(() => {
-          rotateValue.setValue(0);
-        });
-        switch(randomNumber){
+    ReactNativeHapticFeedback.trigger('impactMedium', options);
+
+    Animated.timing(rotateValue, {
+        toValue: 1,
+        duration: 1500,
+        useNativeDriver: true,
+    }).start(() => {
+        rotateValue.setValue(0);
+
+        const randomNumber = Math.floor(Math.random() * 6) + 1;
+
+        switch (randomNumber) {
             case 1:
-                setDiceImage(dice1)
+                setDiceImage(dice1);
                 break;
             case 2:
-                setDiceImage(dice2)
+                setDiceImage(dice2);
                 break;
             case 3:
-                setDiceImage(dice3)
+                setDiceImage(dice3);
                 break;
             case 4:
-                setDiceImage(dice4)
+                setDiceImage(dice4);
                 break;
             case 5:
-                setDiceImage(dice5)
+                setDiceImage(dice5);
                 break;
             case 6:
-                setDiceImage(dice6)
+                setDiceImage(dice6);
                 break;
-            default:setDiceImage(dice1)
-
-                break;
+            default:
+                setDiceImage(dice1);
         }
-     ReactNativeHapticFeedback.trigger('impactLight', options);
-    }
+    });
+};
     const spin = rotateValue.interpolate({
-    inputRange: [0, 2],
-    outputRange: ['0deg', '1020deg'],
+    inputRange: [0, 1],
+    outputRange: ['0deg', '1800deg'],
 });
   return (
   <Animated.View  style={[
@@ -78,7 +80,7 @@ transform: [
   { scale: 1.1 },
 ]  },
 ]}>
-    <Pressable onPress={rollDiceOnTap}  style={styles.diceContainer}>
+    <Pressable onPress={rollDiceOnTap}>
       <Dice imageUrl={diceImage} />
     </Pressable>
     </Animated.View>
@@ -92,6 +94,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  diceContainer: {
+  img: {
+  resizeMode: 'contain',
+  shadowOffset: {
+    width: 0,
+    height: 4,
+  },
+  shadowOpacity: 0.3,
+  shadowRadius: 4,
+  elevation: 5,
 }
 })
